@@ -1,0 +1,1 @@
+<h1>Hai...nama saya <?= $data['nama']; ?></h1>
