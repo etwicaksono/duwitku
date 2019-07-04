@@ -10,9 +10,26 @@ class Auth extends Controller
     {
         $data['judul'] = 'Login';
 
-        $this->view('auth/a_header', $data);
-        $this->view('auth/login');
-        $this->view('auth/a_footer');
+        if (!isset($_POST['email'])) {
+            var_dump($_POST);
+            $this->view('auth/a_header', $data);
+            $this->view('auth/login');
+            $this->view('auth/a_footer');
+        } else {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $user = $this->model('M_user')->getUserByEmail($email);
+            if ($user) {
+                if (password_verify($password, $user['password'])) {
+                    //kalau email dan password benar
+                    header('Location: ' . BASEURL . 'transaksi/pemasukan');
+                } else {
+                    echo "password salah!";
+                }
+            } else {
+                echo "email ini belum terdaftar";
+            }
+        }
     }
 
     public function registrasi()
@@ -26,9 +43,6 @@ class Auth extends Controller
 
     public function tambahUser()
     {
-
-
-
         $email = $_POST['email'];
         $password1 = $_POST['password1'];
         $password2 = $_POST['password2'];
@@ -61,18 +75,6 @@ class Auth extends Controller
 
     public function testbox()
     {
-        //Code here
-        // $email = 'ekoteguhwicakso@gmail.com';
-        // $user = $this->model('M_user')->getUserByEmail($email);
-        // var_dump($user);
-
-
-        $data = [
-            'nama'      => 'Eko Teguh',
-            'email'     => 'echotechno007@gmail.com',
-            'password'  => '1234567890'
-        ];
-
-        $this->model('M_user')->insertRegistration($data);
+        header('Location: ' . BASEURL . 'transaksi/pemasukan');
     }
 }
