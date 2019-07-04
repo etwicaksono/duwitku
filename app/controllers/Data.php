@@ -1,6 +1,11 @@
 <?php
 class Data extends Controller
 {
+    public function index()
+    {
+        header('Location: ' . BASEURL . 'data/data_hutang');
+    }
+
     public function data_hutang()
     {
         $data['header'] = 'DATA';

@@ -20,22 +20,34 @@
                                 <div class="text-center">
                                     <h1 class="h1 text-gray-900 mb-4 mt-3">Registrasi</h1>
                                 </div>
-                                <form class="user" action="<?= BASEURL; ?>auth/registrasi" method="post">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="nama" name="nama"
-                                            placeholder="Masukan nama anda..">
+                                <form class="user" action="<?= BASEURL; ?>auth/tambahUser" method="post">
+                                    <div class="form-group row">
+                                        <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control form-control-user" id="username"
+                                                name="username" placeholder="Masukan nama anda..">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="email"
-                                            name="email" placeholder="Masukan email...">
+                                    <div class="form-group row">
+                                        <label for="email" class="col-sm-2 col-form-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control form-control-user" id="email"
+                                                name="email" placeholder="Masukan email...">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="password1"
-                                            name="password1" placeholder="Password">
+                                    <div class="form-group row">
+                                        <label for="password1" class="col-sm-4 col-form-label">Password</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control form-control-user" id="password1"
+                                                name="password1" placeholder="Password">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="password2"
-                                            name="password2" placeholder="Konfirmasi Password">
+                                    <div class="form-group row">
+                                        <label for="password2" class="col-sm-4 col-form-label">Ulang Password</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control form-control-user" id="password2"
+                                                name="password2" placeholder="Konfirmasi Password">
+                                        </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Registrasi

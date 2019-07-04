@@ -1,6 +1,11 @@
 <?php
 class Transaksi extends Controller
 {
+    public function index()
+    {
+        header('Location: ' . BASEURL . 'transaksi/pemasukan');
+    }
+
     public function pemasukan()
     {
         $data['header'] = 'TRANSAKSI';

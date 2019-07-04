@@ -1,6 +1,11 @@
 <?php
 class Akun extends Controller
 {
+    public function index()
+    {
+        header('Location: ' . BASEURL . 'akun/akun_aset');
+    }
+
     public function akun_aset()
     {
         $data['header'] = 'AKUN';

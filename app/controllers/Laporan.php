@@ -1,6 +1,11 @@
 <?php
 class Laporan extends Controller
 {
+    public function index()
+    {
+        header('Location: ' . BASEURL . 'laporan/jurnal');
+    }
+
     public function jurnal()
     {
         $data['header'] = 'LAPORAN';

@@ -1,6 +1,11 @@
 <?php
 class Pengaturan extends Controller
 {
+    public function index()
+    {
+        header('Location: ' . BASEURL . 'pengaturan/set_password');
+    }
+
     public function set_password()
     {
         $data['header'] = 'PENGATURAN';
