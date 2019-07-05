@@ -1,6 +1,14 @@
 <?php
 class Akun extends Controller
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user'])) {
+            Flasher::setFlash("Anda harus login untuk mendapatkan hak akses!", 'danger');
+            header("Location: " . BASEURL . "auth/login");
+        }
+    }
+
     public function index()
     {
         header('Location: ' . BASEURL . 'akun/akun_aset');
@@ -10,7 +18,6 @@ class Akun extends Controller
     {
         $data['header'] = 'AKUN';
         $data['judul'] = 'AKUN ASET';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -23,7 +30,6 @@ class Akun extends Controller
     {
         $data['header'] = 'AKUN';
         $data['judul'] = 'AKUN PEMASUKAN';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -36,7 +42,6 @@ class Akun extends Controller
     {
         $data['header'] = 'AKUN';
         $data['judul'] = 'AKUN PENGELUARAN';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -49,7 +54,6 @@ class Akun extends Controller
     {
         $data['header'] = 'AKUN';
         $data['judul'] = 'AKUN HUTANG';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -62,7 +66,6 @@ class Akun extends Controller
     {
         $data['header'] = 'AKUN';
         $data['judul'] = 'AKUN PIUTANG';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);

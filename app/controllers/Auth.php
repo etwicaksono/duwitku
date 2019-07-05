@@ -10,8 +10,19 @@ class Auth extends Controller
     {
         $data['judul'] = 'Login';
 
+        //cek cookies
+        if (isset($_COOKIE['email'])) {
+            if ($_COOKIE['email'] == $this->model('M_user')->getUserByEmail($_COOKIE['email'])['email'] && $_COOKIE['key'] == hash('sha256', $_COOKIE['email'])) {
+                $user = $this->model('M_user')->getUserByEmail($_COOKIE['email']);
+                $_SESSION['user'] = $user;
+                Flasher::setFlash("Selamat datang <strong>" . $user['username'] . "</strong>", "success");
+
+                header('Location: ' . BASEURL . 'home');
+                exit;
+            }
+        }
+
         if (!isset($_POST['email'])) {
-            var_dump($_POST);
             $this->view('auth/a_header', $data);
             $this->view('auth/login');
             $this->view('auth/a_footer');
@@ -22,7 +33,21 @@ class Auth extends Controller
             if ($user) {
                 if (password_verify($password, $user['password'])) {
                     //kalau email dan password benar
-                    header('Location: ' . BASEURL . 'transaksi/pemasukan');
+                    // var_dump($user);
+                    // die;
+
+                    //set session
+                    $_SESSION['user'] = $user;
+                    //set cookie
+                    if (isset($_POST['rememberMe'])) {
+                        setcookie('email',  $user['email'], time() + 60 * 60 * 24);
+                        setcookie('key',  hash('sha256', $user['email']), time() + 60 * 60 * 24);
+                    }
+                    //set flash message
+                    Flasher::setFlash("Selamat datang <strong>" . $user['username'] . "</strong>", "success");
+
+                    header('Location: ' . BASEURL . 'home');
+                    exit;
                 } else {
                     echo "password salah!";
                 }
@@ -73,8 +98,33 @@ class Auth extends Controller
         }
     }
 
+    public function logout()
+    {
+        //hapus session
+        $_SESSION = [];
+        session_unset();
+        session_destroy();
+        //hapus cookie
+        setcookie('email', '', time() - 3600);
+        setcookie('key', '', time() - 3600);
+
+        header("Location: " . BASEURL . "auth/login");
+    }
+
     public function testbox()
     {
-        header('Location: ' . BASEURL . 'transaksi/pemasukan');
+        setcookie('email', 'tes', time() + 60);
+        setcookie('key', 'hash', time() + 60 * 60 * 24);
+
+        // setcookie('email', '', time() - 3600);
+        // setcookie('key', '', time() - 3600);
+        var_dump($_COOKIE);
+        //die;
+        header("Location: " . BASEURL . "auth/outputTest");
+    }
+
+    public function outputTest()
+    {
+        var_dump($_COOKIE);
     }
 }

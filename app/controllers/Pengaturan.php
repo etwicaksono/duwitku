@@ -1,6 +1,14 @@
 <?php
 class Pengaturan extends Controller
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user'])) {
+            Flasher::setFlash("Anda harus login untuk mendapatkan hak akses!", 'danger');
+            header("Location: " . BASEURL . "auth/login");
+        }
+    }
+
     public function index()
     {
         header('Location: ' . BASEURL . 'pengaturan/set_password');
@@ -10,7 +18,6 @@ class Pengaturan extends Controller
     {
         $data['header'] = 'PENGATURAN';
         $data['judul'] = 'SET PASSWORD';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -23,7 +30,6 @@ class Pengaturan extends Controller
     {
         $data['header'] = 'PENGATURAN';
         $data['judul'] = 'RESET DATA';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -36,7 +42,6 @@ class Pengaturan extends Controller
     {
         $data['header'] = 'PENGATURAN';
         $data['judul'] = 'USER SETTING';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);

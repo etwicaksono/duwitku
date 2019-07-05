@@ -1,6 +1,14 @@
 <?php
 class Transaksi extends Controller
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user'])) {
+            Flasher::setFlash("Anda harus login untuk mendapatkan hak akses!", 'danger');
+            header("Location: " . BASEURL . "auth/login");
+        }
+    }
+
     public function index()
     {
         header('Location: ' . BASEURL . 'transaksi/pemasukan');
@@ -10,7 +18,6 @@ class Transaksi extends Controller
     {
         $data['header'] = 'TRANSAKSI';
         $data['judul'] = 'PEMASUKAN';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -23,7 +30,6 @@ class Transaksi extends Controller
     {
         $data['header'] = 'TRANSAKSI';
         $data['judul'] = 'PENGELUARAN';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -36,7 +42,6 @@ class Transaksi extends Controller
     {
         $data['header'] = 'TRANSAKSI';
         $data['judul'] = 'TAMBAH HUTANG';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -49,7 +54,6 @@ class Transaksi extends Controller
     {
         $data['header'] = 'TRANSAKSI';
         $data['judul'] = 'PEMBAYARAN HUTANG';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -62,7 +66,6 @@ class Transaksi extends Controller
     {
         $data['header'] = 'TRANSAKSI';
         $data['judul'] = 'TAMBAH PIUTANG';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -75,7 +78,6 @@ class Transaksi extends Controller
     {
         $data['header'] = 'TRANSAKSI';
         $data['judul'] = 'PENYETORAN PIUTANG';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -88,7 +90,6 @@ class Transaksi extends Controller
     {
         $data['header'] = 'TRANSAKSI';
         $data['judul'] = 'PENGALIHAN ASET';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -101,7 +102,6 @@ class Transaksi extends Controller
     {
         $data['header'] = 'TRANSAKSI';
         $data['judul'] = 'SET SALDO AWAL';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);

@@ -2,17 +2,16 @@
 class M_user
 {
     private $db;
-    private $nama = 'Eko Teguh Wicaksono';
 
     public function __construct()
     {
         $this->db = new Database;
     }
 
-    public function getUser()
-    {
-        return $this->nama;
-    }
+    // public function getUser()
+    // {
+    //     return $this->db->query();
+    // }
 
     public function getUserByEmail($email)
     {
@@ -25,7 +24,7 @@ class M_user
     {
         $query = "INSERT INTO user
                     VALUES
-                    ('',:username,:email,:password,'default.png'," . time() . ")
+                    ('',:username,:email,:password,'default.jpg'," . time() . ")
         ";
 
         $this->db->query($query);

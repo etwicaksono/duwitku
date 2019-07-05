@@ -1,6 +1,14 @@
 <?php
 class Data extends Controller
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user'])) {
+            Flasher::setFlash("Anda harus login untuk mendapatkan hak akses!", 'danger');
+            header("Location: " . BASEURL . "auth/login");
+        }
+    }
+
     public function index()
     {
         header('Location: ' . BASEURL . 'data/data_hutang');
@@ -10,7 +18,6 @@ class Data extends Controller
     {
         $data['header'] = 'DATA';
         $data['judul'] = 'DATA HUTANG';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -23,7 +30,6 @@ class Data extends Controller
     {
         $data['header'] = 'DATA';
         $data['judul'] = 'DATA PIUTANG';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);

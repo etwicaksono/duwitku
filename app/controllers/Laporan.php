@@ -1,6 +1,14 @@
 <?php
 class Laporan extends Controller
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user'])) {
+            Flasher::setFlash("Anda harus login untuk mendapatkan hak akses!", 'danger');
+            header("Location: " . BASEURL . "auth/login");
+        }
+    }
+
     public function index()
     {
         header('Location: ' . BASEURL . 'laporan/jurnal');
@@ -10,7 +18,6 @@ class Laporan extends Controller
     {
         $data['header'] = 'LAPORAN';
         $data['judul'] = 'JURNAL';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -23,7 +30,6 @@ class Laporan extends Controller
     {
         $data['header'] = 'LAPORAN';
         $data['judul'] = 'BUKU BESAR';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -36,7 +42,6 @@ class Laporan extends Controller
     {
         $data['header'] = 'LAPORAN';
         $data['judul'] = 'INFORMASI SALDO';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -49,7 +54,6 @@ class Laporan extends Controller
     {
         $data['header'] = 'LAPORAN';
         $data['judul'] = 'LAPORAN BULANAN';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -62,7 +66,6 @@ class Laporan extends Controller
     {
         $data['header'] = 'LAPORAN';
         $data['judul'] = 'LAPORAN TAHUNAN';
-        $data['nama'] = $this->model('M_user')->getUser();
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);

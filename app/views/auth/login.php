@@ -17,6 +17,11 @@
                                     </i>
                                     <h1 class="mx-2">DUWITKU</h1>
                                 </div>
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+                                        <?php Flasher::flash(); ?>
+                                    </div>
+                                </div>
                                 <div class="text-center">
                                     <h1 class="h1 text-gray-900 mb-4 mt-3">Login</h1>
                                 </div>
@@ -31,7 +36,8 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="rememberMe">
+                                            <input type="checkbox" class="custom-control-input" id="rememberMe"
+                                                name="rememberMe">
                                             <label class="custom-control-label" for="rememberMe">Ingat saya</label>
                                         </div>
                                     </div>

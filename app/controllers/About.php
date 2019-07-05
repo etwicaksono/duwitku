@@ -1,6 +1,14 @@
 <?php
 class About extends Controller
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION['user'])) {
+            Flasher::setFlash("Anda harus login untuk mendapatkan hak akses!", 'danger');
+            header("Location: " . BASEURL . "auth/login");
+        }
+    }
+
     public function index($nama = 'Eko Teguh Wicaksono', $pekerjaan = 'mahasiswa')
     {
         $data['title'] = 'Tentang Saya';
