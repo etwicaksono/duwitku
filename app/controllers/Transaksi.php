@@ -109,4 +109,21 @@ class Transaksi extends Controller
         $this->view('transaksi/v_set_saldo_awal', $data);
         $this->view('templates/footer');
     }
+
+    public function c_tambahPemasukan()
+    {
+        if ($this->model('M_transaksi')->m_tambahPemasukan($_POST) > 0) {
+            Flasher::setFlash('Data pemasukan <strong>berhasil</strong> ditambah!', 'success');
+        } else {
+            Flasher::setFlash('Data pemasukan <strong>gagal</strong> ditambah!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/pemasukan");
+    }
+
+    public function testBox()
+    {
+        echo mktime(0, 0, 0, 7, 5, 2019) . "<br>";
+        echo date('d - F - Y', 1562277600);
+    }
 }

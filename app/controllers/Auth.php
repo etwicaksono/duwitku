@@ -79,10 +79,9 @@ class Auth extends Controller
         // die;
         if ($email != $user['email']) { //kalau user belum ada
             if ($password1 === $password2) { //cek kesamaan password
-                // $tes = $this->model('M_user')->tambahDataUser($_POST);
-                // var_dump($tes);
-                // die;
+
                 if ($this->model('M_user')->tambahDataUser($_POST) > 0) {
+                    Flasher::setFlash('Anda telah <strong>berhasil</strong> membuat akun. Silahkan login.', 'success');
                     header('Location: ' . BASEURL . 'auth/login');
                     exit;
                 }
