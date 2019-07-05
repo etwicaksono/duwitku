@@ -2,7 +2,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>Copyright &copy; Duwitku <?= date('Y', time()); ?></span>
         </div>
     </div>
 </footer>
@@ -48,6 +48,9 @@
 
 <!-- Custom scripts for all pages-->
 <script src="<?= BASEURL; ?>vendor/js/sb-admin-2.min.js"></script>
+
+<!-- My own script -->
+<script src="<?= BASEURL; ?>js/script.js"></script>
 
 </body>
 

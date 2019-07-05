@@ -12,7 +12,8 @@
 
     <div class="row">
         <div class="col-lg-3 mb-4">
-            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newTransModal">Tambah Pemasukan</a>
+            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#newTransModal"
+                id="tambahPemasukan">Tambah Pemasukan</a>
         </div>
     </div>
 
@@ -23,8 +24,8 @@
                 <th scope="col" class="text-center" style="width:10%">Tanggal</th>
                 <th scope="col" class="text-center" style="width:10%">Akun</th>
                 <th scope="col" class="text-center" style="width:10%">Jumlah</th>
-                <th scope="col" class="text-center" style="width:10%">Saldo</th>
-                <th scope="col" class="text-center" style="width:15%">Aksi</th>
+                <th scope="col" class="text-center" style="width:10%">Keterangan</th>
+                <th scope="col" class="text-center" style="width:10%">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -34,14 +35,15 @@
             <tr>
                 <th scope="row" class="text-center"><?= $counter; ?></th>
                 <td><?= date('d F Y', $tr['tanggal']); ?></td>
-                <td><?= $tr['nama_pemasukan']; ?></td>
-                <td><?= $tr['jumlah']; ?></td>
-                <td><?= $tr['jumlah']; ?></td>
+                <td><?= $tr['kode_pemasukan'] . " - " . $tr['nama_pemasukan']; ?></td>
+                <td class="text-right"><?= number_format($tr['jumlah'], 0, ',', '.'); ?></td>
+                <td><?= $tr['keterangan']; ?></td>
                 <td>
                     <div class="text-center">
-                        <a href="#" class="btn btn-warning">edit</a>
-                        <a href="#" class="btn btn-info">detail</a>
-                        <a href="#" class="btn btn-danger">delete</a>
+                        <a href="#" class="btn btn-info tampilEditModal" data-toggle="modal"
+                            data-target="#newTransModal" data-id="<?= $tr['id']; ?>">edit</a>
+                        <a href="#" class="btn btn-danger tampilDeleteModal" data-toggle="modal"
+                            data-target="#deleteModal" data-id="<?= $tr['id']; ?>">delete</a>
                     </div>
                 </td>
             </tr>
@@ -74,6 +76,7 @@
                     <div class="form-group row">
                         <label for="tanggal" class="col-3 col-form-label">Tanggal</label>
                         <div class="row col-9">
+                            <input type="hidden" name="id" id="id">
                             <input type="text" class="form-control col-3 ml-3" id="tanggal" name="tanggal"
                                 value="<?= date('d'); ?>" placeholder="Tanggal">
                             <select type="text" class="form-control col-4 ml-2" id="bulan" name="bulan">
@@ -106,7 +109,8 @@
                             ?>
                             <select type="text" class="form-control" id="terimaDari" name="terimaDari">
                                 <?php foreach ($akun as $a) : ?>
-                                <option value="<?= $a['id']; ?>"><?= $a['nama_pemasukan']; ?></option>
+                                <option value="<?= $a['id']; ?>">
+                                    <?= $a['kode_pemasukan'] . " - " . $a['nama_pemasukan']; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -120,7 +124,8 @@
                             ?>
                             <select type="text" class="form-control" id="simpanKe" name="simpanKe">
                                 <?php foreach ($akun as $a) : ?>
-                                <option value="<?= $a['id']; ?>"><?= $a['nama_aset']; ?></option>
+                                <option value="<?= $a['id']; ?>"><?= $a['kode_asset'] . " - " . $a['nama_aset']; ?>
+                                </option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -128,13 +133,14 @@
                     <div class="form-group row">
                         <label for="jumlah" class="col-3 col-form-label">Jumlah</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="jumlah" name="jumlah">
+                            <input type="text" class="form-control" id="jumlah" name="jumlah" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="keterangan" class="col-3 col-form-label">Keterangan</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="keterangan" name="keterangan">
+                            <input type="text" class="form-control" id="keterangan" name="keterangan"
+                                autocomplete="off">
                         </div>
                     </div>
                 </div>
@@ -143,6 +149,27 @@
                     <button type="submit" class="btn btn-primary">Tambah</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<!-- delete modal-->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Hapus data ini?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Pilih hapus jika anda yakin untuk menghapus data ini. Setiap perubahan tidak bisa
+                dikembalikan.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger" id="hapusData" href="#">Hapus</a>
+            </div>
         </div>
     </div>
 </div>

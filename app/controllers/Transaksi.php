@@ -121,9 +121,78 @@ class Transaksi extends Controller
         header("Location: " . BASEURL . "transaksi/pemasukan");
     }
 
+    public function c_tambahPengeluaran()
+    {
+        if ($this->model('M_transaksi')->m_tambahPengeluaran($_POST) > 0) {
+            Flasher::setFlash('Data pengeluaran <strong>berhasil</strong> ditambah!', 'success');
+        } else {
+            Flasher::setFlash('Data pengeluaran <strong>gagal</strong> ditambah!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/pengeluaran");
+    }
+
+    public function c_editPemasukan()
+    {
+
+        if ($this->model('M_transaksi')->m_editPemasukan($_POST) > 0) {
+            Flasher::setFlash('Data pemasukan <strong>berhasil</strong> diubah!', 'success');
+        } else {
+            Flasher::setFlash('Data pemasukan <strong>gagal</strong> diubah!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/pemasukan");
+    }
+
+    public function c_editPengeluaran()
+    {
+
+        if ($this->model('M_transaksi')->m_editPengeluaran($_POST) > 0) {
+            Flasher::setFlash('Data pengeluaran <strong>berhasil</strong> diubah!', 'success');
+        } else {
+            Flasher::setFlash('Data pengeluaran <strong>gagal</strong> diubah!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/pengeluaran");
+    }
+
+    public function c_getPemasukanById()
+    {
+        echo json_encode($this->model('M_transaksi')->m_getPemasukanById($_POST['id']));
+    }
+
+    public function c_getPengeluaranById()
+    {
+        echo json_encode($this->model('M_transaksi')->m_getPengeluaranById($_POST['id']));
+    }
+
+    public function c_hapusPemasukan($id)
+    {
+        if ($this->model('M_transaksi')->m_hapusPemasukan($id) > 0) {
+            Flasher::setFlash('Data pemasukan <strong>berhasil</strong> dihapus!', 'success');
+        } else {
+            Flasher::setFlash('Data pemasukan <strong>gagal</strong> dihapus!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/pemasukan");
+    }
+
+    public function c_hapusPengeluaran($id)
+    {
+        if ($this->model('M_transaksi')->m_hapusPengeluaran($id) > 0) {
+            Flasher::setFlash('Data pengeluaran <strong>berhasil</strong> dihapus!', 'success');
+        } else {
+            Flasher::setFlash('Data pengeluaran <strong>gagal</strong> dihapus!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/pengeluaran");
+    }
+
     public function testBox()
     {
-        echo mktime(0, 0, 0, 7, 5, 2019) . "<br>";
-        echo date('d - F - Y', 1562277600);
+        // echo mktime(0, 0, 0, 7, 5, 2019) . "<br>";
+        // echo date('d - F - Y', 1562277600);
+
+        var_dump($this->model('M_transaksi')->m_getPemasukanById(5));
     }
 }

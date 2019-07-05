@@ -33,8 +33,6 @@ class Auth extends Controller
             if ($user) {
                 if (password_verify($password, $user['password'])) {
                     //kalau email dan password benar
-                    // var_dump($user);
-                    // die;
 
                     //set session
                     $_SESSION['user'] = $user;
@@ -49,10 +47,16 @@ class Auth extends Controller
                     header('Location: ' . BASEURL . 'home');
                     exit;
                 } else {
-                    echo "password salah!";
+                    Flasher::setFlash("Login <strong>gagal!</strong> password anda salah.", "warning");
+
+                    header('Location: ' . BASEURL . 'auth/login');
+                    exit;
                 }
             } else {
-                echo "email ini belum terdaftar";
+                Flasher::setFlash("Login <strong>gagal!</strong> email ini belum terdaftar. Silahkan mendaftar terlebih dahulu.", "danger");
+
+                header('Location: ' . BASEURL . 'auth/login');
+                exit;
             }
         }
     }
@@ -82,6 +86,8 @@ class Auth extends Controller
 
                 if ($this->model('M_user')->tambahDataUser($_POST) > 0) {
                     Flasher::setFlash('Anda telah <strong>berhasil</strong> membuat akun. Silahkan login.', 'success');
+                    $user = $this->model('M_user')->getUserByEmail($email);
+                    $this->setDefault($user['id']);
                     header('Location: ' . BASEURL . 'auth/login');
                     exit;
                 }
@@ -110,16 +116,25 @@ class Auth extends Controller
         header("Location: " . BASEURL . "auth/login");
     }
 
-    public function testbox()
+    public function setDefault($data)
     {
-        setcookie('email', 'tes', time() + 60);
-        setcookie('key', 'hash', time() + 60 * 60 * 24);
+        $this->model('M_transaksi')->m_defaultAkunPemasukan((integer)$data);
+        $this->model('M_transaksi')->m_defaultAkunPengeluaran((integer)$data);
+        $this->model('M_transaksi')->m_defaultAkunAset((integer)$data);
+    }
+
+    public function testBox()
+    {
+        // setcookie('email', 'tes', time() + 60);
+        // setcookie('key', 'hash', time() + 60 * 60 * 24);
 
         // setcookie('email', '', time() - 3600);
         // setcookie('key', '', time() - 3600);
-        var_dump($_COOKIE);
+        //var_dump($_COOKIE);
         //die;
-        header("Location: " . BASEURL . "auth/outputTest");
+        var_dump($_SESSION);
+        $this->model('M_transaksi')->m_defaultAkunPengeluaran((integer)$_SESSION['user']['id']);
+        //header("Location: " . BASEURL . "transaksi/pemasukan");
     }
 
     public function outputTest()
