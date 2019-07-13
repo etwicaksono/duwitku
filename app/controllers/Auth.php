@@ -1,6 +1,12 @@
 <?php
 class Auth extends Controller
 {
+    public function __construct()
+    {
+        if (isset($_SESSION['user'])) {
+            header('Location: ' . BASEURL . 'home');
+        }
+    }
     public function index()
     {
         header('Location: ' . BASEURL . 'auth/login');
@@ -118,9 +124,11 @@ class Auth extends Controller
 
     public function setDefault($data)
     {
-        $this->model('M_transaksi')->m_defaultAkunPemasukan((integer)$data);
-        $this->model('M_transaksi')->m_defaultAkunPengeluaran((integer)$data);
-        $this->model('M_transaksi')->m_defaultAkunAset((integer)$data);
+        $this->model('M_transaksi')->m_defaultAkunPemasukan((int) $data);
+        $this->model('M_transaksi')->m_defaultAkunPengeluaran((int) $data);
+        $this->model('M_transaksi')->m_defaultAkunAset((int) $data);
+        $this->model('M_transaksi')->m_defaultAkunHutang((int) $data);
+        $this->model('M_transaksi')->m_defaultAkunPiutang((int) $data);
     }
 
     public function testBox()
@@ -133,7 +141,7 @@ class Auth extends Controller
         //var_dump($_COOKIE);
         //die;
         var_dump($_SESSION);
-        $this->model('M_transaksi')->m_defaultAkunPengeluaran((integer)$_SESSION['user']['id']);
+        $this->model('M_transaksi')->m_defaultAkunPengeluaran((int) $_SESSION['user']['id']);
         //header("Location: " . BASEURL . "transaksi/pemasukan");
     }
 

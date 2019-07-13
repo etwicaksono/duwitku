@@ -5,4 +5,8 @@ define('BASEURL', 'http://localhost/project/Experiment/php/phpmvc/public/');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'keuangan');
+define('DB_NAME', 'new_keuangan');
+
+//Default method  & controller
+define('DF_CONTROLLER', 'home');
+define('DF_METHOD', 'index');

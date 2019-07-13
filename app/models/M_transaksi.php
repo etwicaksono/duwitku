@@ -15,6 +15,20 @@ class M_transaksi
         return $this->db->resultSet();
     }
 
+    public function getCreditAccount($user_id)
+    {
+        $this->db->query('SELECT * FROM debitur_acc WHERE id_user=:user_id');
+        $this->db->bind('user_id', $user_id);
+        return $this->db->resultSet();
+    }
+
+    public function getDebtAccount($user_id)
+    {
+        $this->db->query('SELECT * FROM kreditur_acc WHERE id_user=:user_id');
+        $this->db->bind('user_id', $user_id);
+        return $this->db->resultSet();
+    }
+
     public function getIncomeAccount($user_id)
     {
         $this->db->query('SELECT * FROM pemasukan_acc WHERE id_user=:user_id');
@@ -26,6 +40,62 @@ class M_transaksi
     {
         $this->db->query('SELECT * FROM pengeluaran_acc WHERE id_user=:user_id');
         $this->db->bind('user_id', $user_id);
+        return $this->db->resultSet();
+    }
+
+    public function getPemasukanByAkunPemasukan($id)
+    {
+        $query = "SELECT id,
+        (SELECT SUM(jumlah)FROM pemasukan
+            WHERE id_akun_pemasukan = :id) AS jumlah
+        FROM pemasukan_acc WHERE id = :id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+        return $this->db->resultSet();
+    }
+
+    public function getPengeluaranByAkunPengeluaran($id)
+    {
+        $query = "SELECT id,
+        (SELECT SUM(jumlah)FROM pengeluaran
+            WHERE id_akun_pengeluaran = :id) AS jumlah
+        FROM pengeluaran_acc WHERE id = :id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+        return $this->db->resultSet();
+    }
+
+    public function getHutangByIdKreditur($id)
+    {
+        $query = "SELECT id,
+        (SELECT SUM(jumlah)FROM hutang
+            WHERE id_kreditur = :id) AS jumlah
+        FROM kreditur_acc WHERE id = :id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+        return $this->db->resultSet();
+    }
+
+    public function getPiutangByIdDebitur($id)
+    {
+        $query = "SELECT id,
+        (SELECT SUM(jumlah)FROM piutang
+            WHERE id_debitur = :id) AS jumlah
+        FROM debitur_acc WHERE id = :id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+        return $this->db->resultSet();
+    }
+
+    public function getSaldoByAssetId($id)
+    {
+        $query = "SELECT saldo FROM saldo WHERE id_aset = :id";
+        $this->db->query($query);
+        $this->db->bind("id", $id);
         return $this->db->resultSet();
     }
 
@@ -253,10 +323,10 @@ class M_transaksi
     {
 
         $query = "INSERT INTO `pemasukan_acc`(`id`, `id_user`, `kode_pemasukan`, `nama_pemasukan`) VALUES
-        ('',:id,'3111','Hasil Usaha'),
-        ('',:id,'3112','Gaji'),
-        ('',:id,'3113','Uang Saku'),
-        ('',:id,'3114','Lain-lain');";
+        ('',:id,'2111','Hasil Usaha'),
+        ('',:id,'2112','Gaji'),
+        ('',:id,'2113','Uang Saku'),
+        ('',:id,'2114','Lain-lain');";
 
         $this->db->query($query);
         $this->db->bind('id', $data);
@@ -267,10 +337,10 @@ class M_transaksi
     {
 
         $query = "INSERT INTO `pengeluaran_acc`(`id`, `id_user`, `kode_pengeluaran`, `nama_pengeluaran`) VALUES 
-        ('',:id_user,'4111','Rumah'),
-        ('',:id_user,'4112','Listrik'),
-        ('',:id_user,'4113','Transportasi'),
-        ('',:id_user,'4114','Air');";
+        ('',:id_user,'3111','Rumah'),
+        ('',:id_user,'3112','Listrik'),
+        ('',:id_user,'3113','Transportasi'),
+        ('',:id_user,'3114','Air');";
 
         $this->db->query($query);
         $this->db->bind('id_user', $data);
@@ -285,6 +355,34 @@ class M_transaksi
         ('',:id,'1112','Bank BNI'),
         ('',:id,'1113','Bank BCA'),
         ('',:id,'1114','Lain-lain');";
+
+        $this->db->query($query);
+        $this->db->bind('id', $data);
+        $this->db->execute();
+    }
+
+    public function m_defaultAkunHutang($data)
+    {
+
+        $query = "INSERT INTO `kreditur_acc`(`id`, `id_user`, `kode_kreditur`, `nama_kreditur`) VALUES
+        ('',:id,'4111','kreditur 1'),
+        ('',:id,'4112','kreditur 2'),
+        ('',:id,'4113','kreditur 3'),
+        ('',:id,'4114','kreditur 4');";
+
+        $this->db->query($query);
+        $this->db->bind('id', $data);
+        $this->db->execute();
+    }
+
+    public function m_defaultAkunPiutang($data)
+    {
+
+        $query = "INSERT INTO `debitur_acc`(`id`, `id_user`, `kode_debitur`, `nama_debitur`) VALUES
+        ('',:id,'5111','debitur 1'),
+        ('',:id,'5112','debitur 2'),
+        ('',:id,'5113','debitur 3'),
+        ('',:id,'5114','debitur 4');";
 
         $this->db->query($query);
         $this->db->bind('id', $data);

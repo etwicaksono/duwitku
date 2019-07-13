@@ -2,8 +2,8 @@
 
 class App
 {
-    protected $controller = 'Home';
-    protected $method = 'index';
+    protected $controller = DF_CONTROLLER;
+    protected $method = DF_METHOD;
     protected $params = [];
 
     public function __construct()

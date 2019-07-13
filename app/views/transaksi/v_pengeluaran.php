@@ -40,10 +40,10 @@
                 <td><?= $tr['keterangan']; ?></td>
                 <td>
                     <div class="text-center">
-                        <a href="#" class="btn btn-info tampilEditPengeluaran" data-toggle="modal"
-                            data-target="#modalPengeluaran" data-id="<?= $tr['id']; ?>">edit</a>
-                        <a href="#" class="btn btn-danger tampilDeletePengeluaran" data-toggle="modal"
-                            data-target="#deleteModal" data-id="<?= $tr['id']; ?>">delete</a>
+                        <a href="#" class="btn btn-info my-1 tampilEditPengeluaran" data-toggle="modal"
+                            data-target="#modalPengeluaran" data-id="<?= $tr['id']; ?>"><i class="fas fa-edit"></i></a>
+                        <a href="#" class="btn btn-danger my-1 tampilDeletePengeluaran" data-toggle="modal"
+                            data-target="#deleteModal" data-id="<?= $tr['id']; ?>"><i class="fas fa-trash-alt"></i></a>
                     </div>
                 </td>
             </tr>

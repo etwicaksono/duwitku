@@ -57,6 +57,8 @@ class Database
 
     public function resultSet()
     {
+        // var_dump($this->stmt);
+        // die;
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }

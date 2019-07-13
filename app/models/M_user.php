@@ -8,10 +8,7 @@ class M_user
         $this->db = new Database;
     }
 
-    // public function getUser()
-    // {
-    //     return $this->db->query();
-    // }
+
 
     public function getUserByEmail($email)
     {
@@ -24,7 +21,7 @@ class M_user
     {
         $query = "INSERT INTO user
                     VALUES
-                    ('',:username,:email,:password,'default.jpg'," . time() . ")
+                    ('',2,:username,:email,:password,'default.jpg'," . time() . ",1)
         ";
 
         $this->db->query($query);

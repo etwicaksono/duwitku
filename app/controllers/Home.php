@@ -1,12 +1,10 @@
 <?php
 class Home extends Controller
 {
-
-
     public function __construct()
     {
         if (!isset($_SESSION['user'])) {
-            Flasher::setFlash("Anda harus login untuk mendapatkan hak akses!", 'danger');
+            Flasher::setFlash("Anda harus login untuk mendapatkan hak akses!", "danger");
             header("Location: " . BASEURL . "auth/login");
         }
     }

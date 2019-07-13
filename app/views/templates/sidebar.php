@@ -31,7 +31,7 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <?php
-        $menu = $this->model('M_app')->getMenu();
+        $menu = $this->model('M_app')->getMenuByRoleId($_SESSION['user']['role_id']);
         foreach ($menu as $m) :
             if ($data['header'] == $m['menu']) {
                 echo '<li class="nav-item active">';
