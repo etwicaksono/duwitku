@@ -221,6 +221,9 @@ class M_transaksi
         ('', :id_user, :id_aset, :id_kreditur, :tanggal, :tanggal_jt, :jumlah, :keterangan)
         ";
 
+        // var_dump($data);
+        // die;
+
         $id_user = $_SESSION['user']['id'];
         $id_aset = $data['simpanKe'];
         $id_kreditur = $data['terimaDari'];

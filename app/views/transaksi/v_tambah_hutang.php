@@ -114,7 +114,7 @@
                         <div class="row col-9">
                             <input type="number" class="form-control col-3 ml-3" id="tanggal_jt" name="tanggal_jt"
                                 value="<?= date('d'); ?>" placeholder="Tanggal">
-                            <select class="form-control col-4 ml-2" name="bulan">
+                            <select class="form-control col-4 ml-2" name="bulan_jt">
                                 <option value="<?= date('m'); ?>" class="text-primary font-weight-bold" id="bulan_jt">
                                     <?= date('F'); ?>
                                 </option>
@@ -131,7 +131,7 @@
                                 <option value="11">November</option>
                                 <option value="12">Desember</option>
                             </select>
-                            <input type="number" class="form-control col-3 ml-2" id="tahun" name="tahun"
+                            <input type="number" class="form-control col-3 ml-2" id="tahun_jt" name="tahun_jt"
                                 value="<?= date('Y'); ?>">
                         </div>
                     </div>

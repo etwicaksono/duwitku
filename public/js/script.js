@@ -127,7 +127,7 @@ $(function () {
         });
     });
 
-    //ajax untuk kembalikan tampilan tambah pemasukan
+    //ajax untuk kembalikan tampilan tambah pengeluaran
 
     $('#tambahPengeluaran').on('click', function () {
         $('.modal-content form').attr('action', 'http://localhost/project/Experiment/php/phpmvc/public/transaksi/c_tambahPengeluaran');
@@ -165,10 +165,10 @@ $(function () {
         $('.modal-footer button[type=submit]').attr('class', 'btn btn-primary');
         let date = new Date();
         $('#tanggal').val(date.getDate());
-        $('#bulan').val(date.getMonth());
+        $('#bulan').val(date.getMonth() + 1);
         $('#tahun').val(date.getFullYear());
         $('#tanggal_jt').val(date.getDate());
-        $('#bulan_jt').val(date.getMonth());
+        $('#bulan_jt').val(date.getMonth() + 1);
         $('#bulan_jt').html(date.getMonth());
         $('#tahun_jt').val(date.getFullYear());
         $('#terimaDari').val(1);
@@ -223,6 +223,34 @@ $(function () {
                     bulan = 'November';
                 } else {
                     bulan = 'Desember';
+                }
+
+                let bulan_jt = '';
+                let y = data.bulan_jt;
+                if (y == 01) {
+                    bulan_jt = 'Januari';
+                } else if (y == 02) {
+                    bulan_jt = 'Februari';
+                } else if (y == 03) {
+                    bulan_jt = 'Maret';
+                } else if (y == 04) {
+                    bulan_jt = 'April';
+                } else if (y == 05) {
+                    bulan_jt = 'Mei';
+                } else if (y == 06) {
+                    bulan_jt = 'Juni';
+                } else if (y == 07) {
+                    bulan_jt = 'Juli';
+                } else if (y == 08) {
+                    bulan_jt = 'Agustus';
+                } else if (y == 09) {
+                    bulan_jt = 'September';
+                } else if (y == 10) {
+                    bulan_jt = 'Oktober';
+                } else if (y == 11) {
+                    bulan_jt = 'November';
+                } else {
+                    bulan_jt = 'Desember';
                 }
 
 
