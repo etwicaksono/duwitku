@@ -41,7 +41,7 @@ class Transaksi extends Controller
     public function tmbh_hutang()
     {
         $data['header'] = 'TRANSAKSI';
-        $data['judul'] = 'TAMBAH HUTANG';
+        $data['judul'] = 'HUTANG';
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -65,7 +65,7 @@ class Transaksi extends Controller
     public function tmbh_piutang()
     {
         $data['header'] = 'TRANSAKSI';
-        $data['judul'] = 'TAMBAH PIUTANG';
+        $data['judul'] = 'PIUTANG';
 
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
@@ -110,6 +110,17 @@ class Transaksi extends Controller
         $this->view('templates/footer');
     }
 
+    public function c_tambahHutang()
+    {
+        if ($this->model('M_transaksi')->m_tambahHutang($_POST) > 0) {
+            Flasher::setFlash('Data hutang <strong>berhasil</strong> ditambah!', 'success');
+        } else {
+            Flasher::setFlash('Data hutang <strong>gagal</strong> ditambah!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/tmbh_hutang");
+    }
+
     public function c_tambahPemasukan()
     {
         if ($this->model('M_transaksi')->m_tambahPemasukan($_POST) > 0) {
@@ -130,6 +141,18 @@ class Transaksi extends Controller
         }
 
         header("Location: " . BASEURL . "transaksi/pengeluaran");
+    }
+
+    public function c_editHutang()
+    {
+
+        if ($this->model('M_transaksi')->m_editHutang($_POST) > 0) {
+            Flasher::setFlash('Data hutang <strong>berhasil</strong> diubah!', 'success');
+        } else {
+            Flasher::setFlash('Data hutang <strong>gagal</strong> diubah!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/tmbh_hutang");
     }
 
     public function c_editPemasukan()
@@ -156,6 +179,11 @@ class Transaksi extends Controller
         header("Location: " . BASEURL . "transaksi/pengeluaran");
     }
 
+    public function c_getHutangById()
+    {
+        echo json_encode($this->model('M_transaksi')->m_getHutangById($_POST['id']));
+    }
+
     public function c_getPemasukanById()
     {
         echo json_encode($this->model('M_transaksi')->m_getPemasukanById($_POST['id']));
@@ -164,6 +192,17 @@ class Transaksi extends Controller
     public function c_getPengeluaranById()
     {
         echo json_encode($this->model('M_transaksi')->m_getPengeluaranById($_POST['id']));
+    }
+
+    public function c_hapusHutang($id)
+    {
+        if ($this->model('M_transaksi')->m_hapusHutang($id) > 0) {
+            Flasher::setFlash('Data hutang <strong>berhasil</strong> dihapus!', 'success');
+        } else {
+            Flasher::setFlash('Data hutang <strong>gagal</strong> dihapus!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/tmbh_hutang");
     }
 
     public function c_hapusPemasukan($id)

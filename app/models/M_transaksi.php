@@ -93,9 +93,21 @@ class M_transaksi
 
     public function getSaldoByAssetId($id)
     {
-        $query = "SELECT saldo FROM saldo WHERE id_aset = :id";
+        $query = "SELECT saldo FROM saldo_aset WHERE id_aset = :id";
         $this->db->query($query);
         $this->db->bind("id", $id);
+        return $this->db->resultSet();
+    }
+
+    public function getHutang($user_id)
+    {
+        $query = "SELECT h.*, k.nama_kreditur, k.kode_kreditur
+                    FROM hutang h JOIN kreditur_acc k
+                    ON h.id_kreditur = k.id
+                    WHERE h.id_user=:user_id";
+
+        $this->db->query($query);
+        $this->db->bind('user_id', $user_id);
         return $this->db->resultSet();
     }
 
@@ -121,6 +133,34 @@ class M_transaksi
         $this->db->query($query);
         $this->db->bind('user_id', $user_id);
         return $this->db->resultSet();
+    }
+
+    public function m_getHutangById($id)
+    {
+        $query = "SELECT *
+                    FROM `hutang` 
+                    WHERE `id`=:id";
+
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+        $raw = $this->db->resultSet()[0];
+
+
+        $result = [
+            'tanggal'     => date('d', $raw['tanggal_hutang']),
+            'bulan'       => date('m', $raw['tanggal_hutang']),
+            'tahun'       => date('Y', $raw['tanggal_hutang']),
+            'tanggal_jt'     => date('d', $raw['tanggal_jatuh_tempo']),
+            'bulan_jt'       => date('m', $raw['tanggal_jatuh_tempo']),
+            'tahun_jt'       => date('Y', $raw['tanggal_jatuh_tempo']),
+            'terimaDari'  => $raw['id_kreditur'],
+            'simpanKe'    => $raw['id_aset'],
+            'jumlah'      => $raw['jumlah'],
+            'keterangan'  => $raw['keterangan'],
+            'id'          => $id
+        ];
+
+        return $result;
     }
 
     public function m_getPemasukanById($id)
@@ -173,6 +213,36 @@ class M_transaksi
         return $result;
     }
 
+    public function m_tambahHutang($data)
+    {
+        //Code here
+        $query = "INSERT INTO hutang
+        VALUES
+        ('', :id_user, :id_aset, :id_kreditur, :tanggal, :tanggal_jt, :jumlah, :keterangan)
+        ";
+
+        $id_user = $_SESSION['user']['id'];
+        $id_aset = $data['simpanKe'];
+        $id_kreditur = $data['terimaDari'];
+        $tanggal = mktime(0, 0, 0, $data['bulan'], $data['tanggal'], $data['tahun']);
+        $tanggal_jt = mktime(0, 0, 0, $data['bulan_jt'], $data['tanggal_jt'], $data['tahun_jt']);
+        $jumlah = $data['jumlah'];
+        $keterangan = $data['keterangan'];
+
+        $this->db->query($query);
+        $this->db->bind('id_user', $id_user);
+        $this->db->bind('id_aset', $id_aset);
+        $this->db->bind('id_kreditur', $id_kreditur);
+        $this->db->bind('tanggal', $tanggal);
+        $this->db->bind('tanggal_jt', $tanggal_jt);
+        $this->db->bind('jumlah', $jumlah);
+        $this->db->bind('keterangan', $keterangan);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
     public function m_tambahPemasukan($data)
     {
         //Code here
@@ -223,6 +293,43 @@ class M_transaksi
         $this->db->bind('tanggal', $tanggal);
         $this->db->bind('jumlah', $jumlah);
         $this->db->bind('keterangan', $keterangan);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function m_editHutang($data)
+    {
+        //Code here
+        $query = "UPDATE hutang SET
+                id_user = :id_user,
+                id_aset = :id_aset,
+                id_kreditur = :id_kreditur,
+                tanggal_hutang = :tanggal,
+                tanggal_jatuh_tempo = :tanggal_jt,
+                jumlah = :jumlah,
+                keterangan = :keterangan
+                WHERE id = :id
+        ";
+
+        $id_user = $_SESSION['user']['id'];
+        $id_aset = $data['simpanKe'];
+        $id_kreditur = $data['terimaDari'];
+        $tanggal = mktime(0, 0, 0, $data['bulan'], $data['tanggal'], $data['tahun']);
+        $tanggal_jt = mktime(0, 0, 0, $data['bulan_jt'], $data['tanggal_jt'], $data['tahun_jt']);
+        $jumlah = $data['jumlah'];
+        $keterangan = $data['keterangan'];
+
+        $this->db->query($query);
+        $this->db->bind('id_user', $id_user);
+        $this->db->bind('id_aset', $id_aset);
+        $this->db->bind('id_kreditur', $id_kreditur);
+        $this->db->bind('tanggal', $tanggal);
+        $this->db->bind('tanggal_jt', $tanggal_jt);
+        $this->db->bind('jumlah', $jumlah);
+        $this->db->bind('keterangan', $keterangan);
+        $this->db->bind('id', $data['id']);
 
         $this->db->execute();
 
@@ -292,6 +399,17 @@ class M_transaksi
         $this->db->bind('keterangan', $keterangan);
         $this->db->bind('id', $data['id']);
 
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function m_hapusHutang($id)
+    {
+        //Code here
+        $query = "DELETE FROM hutang WHERE id=:id";
+        $this->db->query($query);
+        $this->db->bind('id', $id);
         $this->db->execute();
 
         return $this->db->rowCount();

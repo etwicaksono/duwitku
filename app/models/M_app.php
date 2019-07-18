@@ -15,7 +15,8 @@ class M_app
                 (SELECT app_menu.menu FROM app_menu WHERE app_menu.id = user_access.menu_id) AS menu,
                 (SELECT app_menu.icon FROM app_menu WHERE app_menu.id = user_access.menu_id) AS icon                
                 FROM user_access
-                WHERE ROLE_ID = :role_id";
+                WHERE ROLE_ID = :role_id
+                ";
         $this->db->query($query);
         $this->db->bind('role_id', $id);
         return $this->db->resultSet();

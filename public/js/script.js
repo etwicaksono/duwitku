@@ -23,10 +23,38 @@ $(function () {
             method: 'post',
             dataType: 'json',
             success: function (data) {
-                console.log(data.tanggal);
+                console.log(data.bulan);
+                let bulan = '';
+                let x = data.bulan;
+                if (x == 01) {
+                    bulan = 'Januari';
+                } else if (x == 02) {
+                    bulan = 'Februari';
+                } else if (x == 03) {
+                    bulan = 'Maret';
+                } else if (x == 04) {
+                    bulan = 'April';
+                } else if (x == 05) {
+                    bulan = 'Mei';
+                } else if (x == 06) {
+                    bulan = 'Juni';
+                } else if (x == 07) {
+                    bulan = 'Juli';
+                } else if (x == 08) {
+                    bulan = 'Agustus';
+                } else if (x == 09) {
+                    bulan = 'September';
+                } else if (x == 10) {
+                    bulan = 'Oktober';
+                } else if (x == 11) {
+                    bulan = 'November';
+                } else {
+                    bulan = 'Desember';
+                }
 
                 $('#tanggal').val(data.tanggal);
-                $('#bulan').val(data.bulan);
+                $('#bulan_text').val(data.bulan);
+                $('#bulan_text').html(bulan);
                 $('#tahun').val(data.tahun);
                 $('#terimaDari').val(data.terimaDari);
                 $('#simpanKe').val(data.simpanKe);

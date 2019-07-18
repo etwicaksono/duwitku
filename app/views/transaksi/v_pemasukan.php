@@ -80,7 +80,7 @@
                             <input type="text" class="form-control col-3 ml-3" id="tanggal" name="tanggal"
                                 value="<?= date('d'); ?>" placeholder="Tanggal">
                             <select type="text" class="form-control col-4 ml-2" id="bulan" name="bulan">
-                                <option value="<?= date('m'); ?>" class="text-primary font-weight-bold">
+                                <option value="<?= date('m'); ?>" class="text-primary font-weight-bold" id="bulan_text">
                                     <?= date('F'); ?>
                                 </option>
                                 <option value="1">Januari</option>
