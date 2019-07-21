@@ -14,6 +14,8 @@ class Auth extends Controller
 
     public function login()
     {
+        var_dump($_COOKIE);
+        die;
         $data['judul'] = 'Login';
 
         //cek cookies
@@ -140,9 +142,27 @@ class Auth extends Controller
 
     public function testBox()
     {
+        $email = "admin@gmail.com";
+        $user = $this->model('M_user')->getUserByEmail($email);
+        $key = hash('sha256', $user['email']);
 
-        var_dump($_SESSION);
-        $this->model('M_transaksi')->m_defaultAkunPengeluaran((int) $_SESSION['user']['id']);
+        setcookie('email',  $user['email'], time() + 60);
+        setcookie('key',  $key, time() + 60);
+
+        var_dump($user);
+        var_dump($_COOKIE);
+    }
+
+    public function testBoxl()
+    {
+        $email = "admin@gmail.com";
+        $user = $this->model('M_user')->getUserByEmail($email);
+        $key = hash('sha256', $user['email']);
+
+        setcookie('email',  $user['email'], time() - 3600);
+        setcookie('key',  $key, time() - 3600);
+        var_dump($user);
+        var_dump($_COOKIE);
     }
 
     public function outputTest()
