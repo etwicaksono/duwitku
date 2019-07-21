@@ -9,7 +9,7 @@ class Auth extends Controller
     }
     public function index()
     {
-        header('Location: ' . BASEURL . 'auth/login');
+        header('Location: ' . BASEURL . 'Auth/login');
     }
 
     public function login()
@@ -56,19 +56,19 @@ class Auth extends Controller
                     } else {
                         Flasher::setFlash("Login <strong>gagal!</strong> password anda salah.", "warning");
 
-                        header('Location: ' . BASEURL . 'auth/login');
+                        header('Location: ' . BASEURL . 'Auth/login');
                         exit;
                     }
                 } else {
                     Flasher::setFlash("Login <strong>gagal!</strong> akun anda saat ini sedang dinonaktifkan oleh admin.", "warning");
 
-                    header('Location: ' . BASEURL . 'auth/login');
+                    header('Location: ' . BASEURL . 'Auth/login');
                     exit;
                 }
             } else {
                 Flasher::setFlash("Login <strong>gagal!</strong> email ini belum terdaftar. Silahkan mendaftar terlebih dahulu.", "danger");
 
-                header('Location: ' . BASEURL . 'auth/login');
+                header('Location: ' . BASEURL . 'Auth/login');
                 exit;
             }
         }
@@ -101,7 +101,7 @@ class Auth extends Controller
                     Flasher::setFlash('Anda telah <strong>berhasil</strong> membuat akun. Silahkan login.', 'success');
                     $user = $this->model('M_user')->getUserByEmail($email);
                     $this->setDefault($user['id']);
-                    header('Location: ' . BASEURL . 'auth/login');
+                    header('Location: ' . BASEURL . 'Auth/login');
                     exit;
                 }
             } else {
@@ -126,7 +126,7 @@ class Auth extends Controller
         setcookie('email', '', time() - 3600);
         setcookie('key', '', time() - 3600);
 
-        header("Location: " . BASEURL . "auth/login");
+        header("Location: " . BASEURL . "Auth/login");
     }
 
     public function setDefault($data)

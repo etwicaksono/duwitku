@@ -1,5 +1,6 @@
 <div class="container">
-
+    <?php var_dump($_COOKIE);
+    die; ?>
     <!-- Outer Row -->
     <div class="row justify-content-center">
 

@@ -11,7 +11,7 @@ class Transaksi extends Controller
 
     public function index()
     {
-        header('Location: ' . BASEURL . 'transaksi/pemasukan');
+        header('Location: ' . BASEURL . 'Transaksi/pemasukan');
     }
 
     public function pemasukan()
@@ -129,7 +129,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data hutang <strong>gagal</strong> ditambah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/tmbh_hutang");
+        header("Location: " . BASEURL . "Transaksi/tmbh_hutang");
     }
 
     public function c_tambahPemasukan()
@@ -140,7 +140,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data pemasukan <strong>gagal</strong> ditambah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/pemasukan");
+        header("Location: " . BASEURL . "Transaksi/pemasukan");
     }
 
     public function c_tambahPengeluaran()
@@ -151,7 +151,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data pengeluaran <strong>gagal</strong> ditambah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/pengeluaran");
+        header("Location: " . BASEURL . "Transaksi/pengeluaran");
     }
 
     public function c_tambahPiutang()
@@ -163,7 +163,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data piutang <strong>gagal</strong> ditambah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/tmbh_piutang");
+        header("Location: " . BASEURL . "Transaksi/tmbh_piutang");
     }
 
     public function c_bayarHutang()
@@ -174,7 +174,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Hutang <strong>gagal</strong> dibayar!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/tmbh_hutang");
+        header("Location: " . BASEURL . "Transaksi/tmbh_hutang");
     }
 
     public function c_bayarPiutang()
@@ -189,7 +189,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Hutang <strong>gagal</strong> dibayar!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/tmbh_piutang");
+        header("Location: " . BASEURL . "Transaksi/tmbh_piutang");
     }
 
     public function c_editHutang()
@@ -201,7 +201,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data hutang <strong>gagal</strong> diubah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/tmbh_hutang");
+        header("Location: " . BASEURL . "Transaksi/tmbh_hutang");
     }
 
     public function c_editPemasukan()
@@ -213,7 +213,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data pemasukan <strong>gagal</strong> diubah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/pemasukan");
+        header("Location: " . BASEURL . "Transaksi/pemasukan");
     }
 
     public function c_editPengeluaran()
@@ -225,7 +225,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data pengeluaran <strong>gagal</strong> diubah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/pengeluaran");
+        header("Location: " . BASEURL . "Transaksi/pengeluaran");
     }
 
     public function c_editPiutang()
@@ -237,7 +237,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data piutang <strong>gagal</strong> diubah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/tmbh_piutang");
+        header("Location: " . BASEURL . "Transaksi/tmbh_piutang");
     }
 
     public function c_getHutangById()
@@ -269,7 +269,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data hutang <strong>gagal</strong> dihapus!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/tmbh_hutang");
+        header("Location: " . BASEURL . "Transaksi/tmbh_hutang");
     }
 
     public function c_hapusPemasukan($id)
@@ -280,7 +280,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data pemasukan <strong>gagal</strong> dihapus!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/pemasukan");
+        header("Location: " . BASEURL . "Transaksi/pemasukan");
     }
 
     public function c_hapusPengeluaran($id)
@@ -291,7 +291,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data pengeluaran <strong>gagal</strong> dihapus!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/pengeluaran");
+        header("Location: " . BASEURL . "Transaksi/pengeluaran");
     }
 
     public function c_hapusPiutang($id)
@@ -303,7 +303,7 @@ class Transaksi extends Controller
             Flasher::setFlash('Data piutang <strong>gagal</strong> dihapus!', 'danger');
         }
 
-        header("Location: " . BASEURL . "transaksi/tmbh_piutang");
+        header("Location: " . BASEURL . "Transaksi/tmbh_piutang");
     }
 
     public function setSaldoAwal()

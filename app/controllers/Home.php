@@ -5,7 +5,7 @@ class Home extends Controller
     {
         if (!isset($_SESSION['user'])) {
             Flasher::setFlash("Anda harus login untuk mendapatkan hak akses!", "danger");
-            header("Location: " . BASEURL . "auth/login");
+            header("Location: " . BASEURL . "Auth/login");
         }
     }
 

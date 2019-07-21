@@ -5,13 +5,13 @@ class Pengaturan extends Controller
     {
         if (!isset($_SESSION['user'])) {
             Flasher::setFlash("Anda harus login untuk mendapatkan hak akses!", 'danger');
-            header("Location: " . BASEURL . "auth/login");
+            header("Location: " . BASEURL . "Auth/login");
         }
     }
 
     public function index()
     {
-        header('Location: ' . BASEURL . 'pengaturan/user_setting');
+        header('Location: ' . BASEURL . 'Pengaturan/user_setting');
     }
 
     public function editProfile()
@@ -36,10 +36,10 @@ class Pengaturan extends Controller
             $user = $this->model('M_user')->getUserByEmail($data['email']);
             $_SESSION['user'] = $user;
             Flasher::setFlash("Data anda <strong>berhasil</strong> diubah", "success");
-            header('Location:' . BASEURL . 'pengaturan/user_setting');
+            header('Location:' . BASEURL . 'Pengaturan/user_setting');
         } else {
             Flasher::setFlash("Data anda <strong>gagal</strong> diubah", "danger");
-            header('Location:' . BASEURL . 'pengaturan/user_setting');
+            header('Location:' . BASEURL . 'Pengaturan/user_setting');
         }
     }
 
@@ -110,22 +110,22 @@ class Pengaturan extends Controller
                 if (password_verify($p3, $pass)) {
                     if ($this->model('M_user')->gantiPassword($p1)) {
                         Flasher::setFlash("Password berhasil diubah!", 'success');
-                        header('Location:' . BASEURL . 'pengaturan/set_password');
+                        header('Location:' . BASEURL . 'Pengaturan/set_password');
                     } else {
                         Flasher::setFlash("Password gagal diubah!", 'danger');
-                        header('Location:' . BASEURL . 'pengaturan/set_password');
+                        header('Location:' . BASEURL . 'Pengaturan/set_password');
                     }
                 } else {
                     Flasher::setFlash("Password salah!", 'danger');
-                    header('Location:' . BASEURL . 'pengaturan/set_password');
+                    header('Location:' . BASEURL . 'Pengaturan/set_password');
                 }
             } else {
                 Flasher::setFlash("Kedua kolom password baru harus sama!", 'danger');
-                header('Location:' . BASEURL . 'pengaturan/set_password');
+                header('Location:' . BASEURL . 'Pengaturan/set_password');
             }
         } else {
             Flasher::setFlash("Kedua kolom password baru harus diisi!", 'danger');
-            header('Location:' . BASEURL . 'pengaturan/set_password');
+            header('Location:' . BASEURL . 'Pengaturan/set_password');
         }
     }
 
@@ -137,7 +137,7 @@ class Pengaturan extends Controller
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
         $this->view('templates/topbar', $data);
-        $this->view('pengaturan/v_set_password', $data);
+        $this->view('Pengaturan/v_set_password', $data);
         $this->view('templates/footer');
     }
 
@@ -242,7 +242,7 @@ class Pengaturan extends Controller
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
         $this->view('templates/topbar', $data);
-        $this->view('pengaturan/v_user_setting', $data);
+        $this->view('Pengaturan/v_user_setting', $data);
         $this->view('templates/footer');
     }
 }

@@ -5,13 +5,13 @@ class Akun extends Controller
     {
         if (!isset($_SESSION['user'])) {
             Flasher::setFlash("Anda harus login untuk mendapatkan hak akses!", 'danger');
-            header("Location: " . BASEURL . "auth/login");
+            header("Location: " . BASEURL . "Auth/login");
         }
     }
 
     public function index()
     {
-        header('Location: ' . BASEURL . 'akun/akun_aset');
+        header('Location: ' . BASEURL . 'Akun/akun_aset');
     }
 
     public function akun_aset()
@@ -82,7 +82,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun hutang <strong>gagal</strong> diubah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_hutang");
+        header("Location: " . BASEURL . "Akun/akun_hutang");
     }
 
     public function c_editAkunPemasukan()
@@ -93,7 +93,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun pemasukan <strong>gagal</strong> diubah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_pemasukan");
+        header("Location: " . BASEURL . "Akun/akun_pemasukan");
     }
 
     public function c_editAkunPengeluaran()
@@ -104,7 +104,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun pengeluaran <strong>gagal</strong> diubah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_pengeluaran");
+        header("Location: " . BASEURL . "Akun/akun_pengeluaran");
     }
 
     public function c_editAkunPiutang()
@@ -115,7 +115,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun piutang <strong>gagal</strong> diubah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_piutang");
+        header("Location: " . BASEURL . "Akun/akun_piutang");
     }
 
     public function c_editAset()
@@ -126,7 +126,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun aset <strong>gagal</strong> diubah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_aset");
+        header("Location: " . BASEURL . "Akun/akun_aset");
     }
 
     public function c_getAkunAsetById()
@@ -163,7 +163,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun hutang <strong>gagal</strong> dihapus!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_hutang");
+        header("Location: " . BASEURL . "Akun/akun_hutang");
     }
 
     public function c_hapusAkunPemasukan($data)
@@ -174,7 +174,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun pemasukan <strong>gagal</strong> dihapus!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_pemasukan");
+        header("Location: " . BASEURL . "Akun/akun_pemasukan");
     }
 
     public function c_hapusAkunPiutang($data)
@@ -185,7 +185,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun piutang <strong>gagal</strong> dihapus!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_piutang");
+        header("Location: " . BASEURL . "Akun/akun_piutang");
     }
 
     public function c_hapusAkunPengeluaran($data)
@@ -196,7 +196,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun pengeluaran <strong>gagal</strong> dihapus!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_pengeluaran");
+        header("Location: " . BASEURL . "Akun/akun_pengeluaran");
     }
 
     public function c_hapusAset($data)
@@ -207,7 +207,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun aset <strong>gagal</strong> dihapus!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_aset");
+        header("Location: " . BASEURL . "Akun/akun_aset");
     }
 
 
@@ -221,7 +221,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun hutang <strong>gagal</strong> ditambah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_hutang");
+        header("Location: " . BASEURL . "Akun/akun_hutang");
     }
 
     public function c_tambahAkunPemasukan()
@@ -234,7 +234,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun pemasukan <strong>gagal</strong> ditambah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_pemasukan");
+        header("Location: " . BASEURL . "Akun/akun_pemasukan");
     }
 
     public function c_tambahAkunPengeluaran()
@@ -247,7 +247,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun pengeluaran <strong>gagal</strong> ditambah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_pengeluaran");
+        header("Location: " . BASEURL . "Akun/akun_pengeluaran");
     }
 
     public function c_tambahAkunPiutang()
@@ -260,7 +260,7 @@ class Akun extends Controller
             Flasher::setFlash('Akun piutang <strong>gagal</strong> ditambah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_piutang");
+        header("Location: " . BASEURL . "Akun/akun_piutang");
     }
 
     public function c_tambahAset()
@@ -273,6 +273,6 @@ class Akun extends Controller
             Flasher::setFlash('Akun aset <strong>gagal</strong> ditambah!', 'danger');
         }
 
-        header("Location: " . BASEURL . "akun/akun_aset");
+        header("Location: " . BASEURL . "Akun/akun_aset");
     }
 }
