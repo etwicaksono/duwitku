@@ -177,6 +177,17 @@ class M_transaksi
         return $this->db->resultSet();
     }
 
+    public function hapusAkunSaldoAwalByUserId($id)
+    {
+        $query = "DELETE FROM saldo_awal WHERE id_user =:id_user";
+
+        $this->db->query($query);
+        $this->db->bind('id_user', $id);
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
     public function hapusAkunHutangByUserId($id)
     {
         $query = "DELETE FROM kreditur_acc WHERE id_user =:id_user";

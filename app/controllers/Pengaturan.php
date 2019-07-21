@@ -180,6 +180,14 @@ class Pengaturan extends Controller
         } else {
             $message .= '<strong class="text-danger">Gagal</strong> hapus akun pengeluaran.<br>';
         }
+
+        if ($this->model('M_transaksi')->hapusAkunSaldoAwalByUserId($_SESSION['user']['id']) > 0) {
+            $message .= '<strong class="text-success">Berhasil</strong> hapus saldo awal.<br>';
+        } else {
+            $message .= '<strong class="text-danger">Gagal</strong> hapus saldo awal.<br>';
+        }
+
+
         if ($this->model('M_transaksi')->hapusAsetByUserId($_SESSION['user']['id']) > 0) {
             $message .= '<strong class="text-success">Berhasil</strong> hapus akun aset.<br>';
         } else {
