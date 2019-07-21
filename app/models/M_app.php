@@ -24,7 +24,7 @@ class M_app
 
     public function getSubMenu($id)
     {
-        $this->db->query('SELECT * FROM app_sub_menu WHERE id_menu=:id');
+        $this->db->query('SELECT * FROM app_sub_menu WHERE id_menu=:id ORDER BY id');
         $this->db->bind('id', $id);
         return $this->db->resultSet();
     }

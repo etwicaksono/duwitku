@@ -52,6 +52,13 @@
 <!-- My own script -->
 <script src="<?= BASEURL; ?>js/script.js"></script>
 
+<script>
+//script untuk ganti nama file yang diupload ketika edit profil
+$('.custom-file-input').on('change', function() {
+    let fileName = $(this).val().split('\\').pop();
+    $(this).next('.custom-file-label').addClass("selected").html(fileName);
+});
+</script>
 </body>
 
 </html>

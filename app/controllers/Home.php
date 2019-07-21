@@ -11,7 +11,6 @@ class Home extends Controller
 
     public function index()
     {
-
         $data['header'] = 'Dashboard';
         $data['judul'] = 'Dashboard';
 

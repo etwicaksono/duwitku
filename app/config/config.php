@@ -10,3 +10,6 @@ define('DB_NAME', 'new_keuangan');
 //Default method  & controller
 define('DF_CONTROLLER', 'home');
 define('DF_METHOD', 'index');
+
+//Base path
+define('BASEPATH', $_SERVER['DOCUMENT_ROOT'] . '/project/Experiment/php/phpmvc/public/');

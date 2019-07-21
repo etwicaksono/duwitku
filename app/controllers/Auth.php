@@ -37,23 +37,30 @@ class Auth extends Controller
             $password = $_POST['password'];
             $user = $this->model('M_user')->getUserByEmail($email);
             if ($user) {
-                if (password_verify($password, $user['password'])) {
-                    //kalau email dan password benar
+                if ($user['is_active'] == 1) {
+                    if (password_verify($password, $user['password'])) {
+                        //kalau email dan password benar
 
-                    //set session
-                    $_SESSION['user'] = $user;
-                    //set cookie
-                    if (isset($_POST['rememberMe'])) {
-                        setcookie('email',  $user['email'], time() + 60 * 60 * 24);
-                        setcookie('key',  hash('sha256', $user['email']), time() + 60 * 60 * 24);
+                        //set session
+                        $_SESSION['user'] = $user;
+                        //set cookie
+                        if (isset($_POST['rememberMe'])) {
+                            setcookie('email',  $user['email'], time() + 60 * 60 * 24);
+                            setcookie('key',  hash('sha256', $user['email']), time() + 60 * 60 * 24);
+                        }
+                        //set flash message
+                        Flasher::setFlash("Selamat datang <strong>" . $user['username'] . "</strong>", "success");
+
+                        header('Location: ' . BASEURL . 'home');
+                        exit;
+                    } else {
+                        Flasher::setFlash("Login <strong>gagal!</strong> password anda salah.", "warning");
+
+                        header('Location: ' . BASEURL . 'auth/login');
+                        exit;
                     }
-                    //set flash message
-                    Flasher::setFlash("Selamat datang <strong>" . $user['username'] . "</strong>", "success");
-
-                    header('Location: ' . BASEURL . 'home');
-                    exit;
                 } else {
-                    Flasher::setFlash("Login <strong>gagal!</strong> password anda salah.", "warning");
+                    Flasher::setFlash("Login <strong>gagal!</strong> akun anda saat ini sedang dinonaktifkan oleh admin.", "warning");
 
                     header('Location: ' . BASEURL . 'auth/login');
                     exit;
@@ -133,16 +140,9 @@ class Auth extends Controller
 
     public function testBox()
     {
-        // setcookie('email', 'tes', time() + 60);
-        // setcookie('key', 'hash', time() + 60 * 60 * 24);
 
-        // setcookie('email', '', time() - 3600);
-        // setcookie('key', '', time() - 3600);
-        //var_dump($_COOKIE);
-        //die;
         var_dump($_SESSION);
         $this->model('M_transaksi')->m_defaultAkunPengeluaran((int) $_SESSION['user']['id']);
-        //header("Location: " . BASEURL . "transaksi/pemasukan");
     }
 
     public function outputTest()

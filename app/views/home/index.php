@@ -121,7 +121,7 @@
             <?php
             $ind = 0;
             $jumlah = 0;
-            $aset = $this->model('M_transaksi')->getDebtAccount($_SESSION['user']['id']);
+            $aset = $this->model('M_transaksi')->getCrediturAccount($_SESSION['user']['id']);
             foreach ($aset as $as) : ?>
             <tr>
                 <td class="text-center"><?php if ($ind == 0) echo $counter; ?></td>
@@ -152,7 +152,7 @@
             <?php
             $ind = 0;
             $jumlah = 0;
-            $aset = $this->model('M_transaksi')->getCreditAccount($_SESSION['user']['id']);
+            $aset = $this->model('M_transaksi')->getDebiturAccount($_SESSION['user']['id']);
             foreach ($aset as $as) : ?>
             <tr>
                 <td class="text-center"><?php if ($ind == 0) echo $counter; ?></td>

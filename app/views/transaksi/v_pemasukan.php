@@ -133,7 +133,7 @@
                     <div class="form-group row">
                         <label for="jumlah" class="col-3 col-form-label">Jumlah</label>
                         <div class="col-9">
-                            <input type="text" class="form-control" id="jumlah" name="jumlah" autocomplete="off">
+                            <input type="number" class="form-control" id="jumlah" name="jumlah" autocomplete="off">
                         </div>
                     </div>
                     <div class="form-group row">

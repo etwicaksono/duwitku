@@ -26,6 +26,17 @@ class Transaksi extends Controller
         $this->view('templates/footer');
     }
 
+    public function pengalihanAset()
+    {
+        if ($this->model('M_transaksi')->m_pengalihanAset($_POST) > 0) {
+            Flasher::setFlash('Data aset <strong>berhasil</strong> dialihkan!', 'success');
+        } else {
+            Flasher::setFlash('Data aset <strong>gagal</strong> dialihkan!', 'danger');
+        }
+
+        header("Location: " . BASEURL);
+    }
+
     public function pengeluaran()
     {
         $data['header'] = 'TRANSAKSI';
@@ -143,6 +154,44 @@ class Transaksi extends Controller
         header("Location: " . BASEURL . "transaksi/pengeluaran");
     }
 
+    public function c_tambahPiutang()
+    {
+
+        if ($this->model('M_transaksi')->m_tambahPiutang($_POST) > 0) {
+            Flasher::setFlash('Data piutang <strong>berhasil</strong> ditambah!', 'success');
+        } else {
+            Flasher::setFlash('Data piutang <strong>gagal</strong> ditambah!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/tmbh_piutang");
+    }
+
+    public function c_bayarHutang()
+    {
+        if ($this->model('M_transaksi')->m_bayarHutang($_POST) > 0) {
+            Flasher::setFlash('Hutang <strong>berhasil</strong> dibayar!', 'success');
+        } else {
+            Flasher::setFlash('Hutang <strong>gagal</strong> dibayar!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/tmbh_hutang");
+    }
+
+    public function c_bayarPiutang()
+    {
+        // var_dump($_POST);
+        // var_dump($_SESSION);
+        // die;
+
+        if ($this->model('M_transaksi')->m_bayarPiutang($_POST) > 0) {
+            Flasher::setFlash('Hutang <strong>berhasil</strong> dibayar!', 'success');
+        } else {
+            Flasher::setFlash('Hutang <strong>gagal</strong> dibayar!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/tmbh_piutang");
+    }
+
     public function c_editHutang()
     {
 
@@ -179,6 +228,18 @@ class Transaksi extends Controller
         header("Location: " . BASEURL . "transaksi/pengeluaran");
     }
 
+    public function c_editPiutang()
+    {
+
+        if ($this->model('M_transaksi')->m_editPiutang($_POST) > 0) {
+            Flasher::setFlash('Data piutang <strong>berhasil</strong> diubah!', 'success');
+        } else {
+            Flasher::setFlash('Data piutang <strong>gagal</strong> diubah!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/tmbh_piutang");
+    }
+
     public function c_getHutangById()
     {
         echo json_encode($this->model('M_transaksi')->m_getHutangById($_POST['id']));
@@ -194,8 +255,14 @@ class Transaksi extends Controller
         echo json_encode($this->model('M_transaksi')->m_getPengeluaranById($_POST['id']));
     }
 
+    public function c_getPiutangById()
+    {
+        echo json_encode($this->model('M_transaksi')->m_getPiutangById($_POST['id']));
+    }
+
     public function c_hapusHutang($id)
     {
+        $this->model('M_transaksi')->m_hapusHutangByr($id);
         if ($this->model('M_transaksi')->m_hapusHutang($id) > 0) {
             Flasher::setFlash('Data hutang <strong>berhasil</strong> dihapus!', 'success');
         } else {
@@ -225,6 +292,36 @@ class Transaksi extends Controller
         }
 
         header("Location: " . BASEURL . "transaksi/pengeluaran");
+    }
+
+    public function c_hapusPiutang($id)
+    {
+        $this->model('M_transaksi')->m_hapusPiutangByr($id);
+        if ($this->model('M_transaksi')->m_hapusPiutang($id) > 0) {
+            Flasher::setFlash('Data piutang <strong>berhasil</strong> dihapus!', 'success');
+        } else {
+            Flasher::setFlash('Data piutang <strong>gagal</strong> dihapus!', 'danger');
+        }
+
+        header("Location: " . BASEURL . "transaksi/tmbh_piutang");
+    }
+
+    public function setSaldoAwal()
+    {
+        $akun = $this->model('M_transaksi')->getAssetAccount($_SESSION['user']['id']);
+        $data = [];
+        foreach ($akun as $a) {
+            $data[$a['id']] = $_POST['aset' . $a['id']];
+        }
+
+
+        if ($this->model('M_transaksi')->m_setSaldoAwal($data) > 0) {
+            Flasher::setFlash('Saldo awal <strong>berhasil</strong> dibuat!', 'success');
+        } else {
+            Flasher::setFlash('Saldo awal <strong>gagal</strong> dibuat!', 'danger');
+        }
+
+        header("Location: " . BASEURL);
     }
 
     public function testBox()
