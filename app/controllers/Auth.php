@@ -3,9 +3,9 @@ class Auth extends Controller
 {
     public function __construct()
     {
-        if (isset($_SESSION['user'])) {
-            header('Location: ' . BASEURL . 'home');
-        }
+        // if (isset($_SESSION['user'])) {
+        //     header('Location: ' . BASEURL . 'home');
+        // }
     }
     public function index()
     {

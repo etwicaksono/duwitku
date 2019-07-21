@@ -63,7 +63,7 @@
                         if ($sm['sub_menu'] == $data['judul']) {
                             echo 'active ';
                         }
-                        echo '"href="' . BASEURL . $sm["link"] . '"';
+                        echo '" href="' . BASEURL . $sm["link"] . '"';
 
                         if ($sm['sub_menu'] == 'PENGALIHAN ASET') {
                             echo ' data-toggle="modal" data-target="#pengalihanAsetModal"';

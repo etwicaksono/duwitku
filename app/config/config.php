@@ -8,7 +8,7 @@ define('DB_PASS', '');
 define('DB_NAME', 'new_keuangan');
 
 //Default method  & controller
-define('DF_CONTROLLER', 'Home');
+define('DF_CONTROLLER', 'Auth');
 define('DF_METHOD', 'index');
 
 //Base path
